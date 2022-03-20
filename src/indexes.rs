@@ -1,7 +1,7 @@
-use crate::{client::Client, document::*, errors::Error, request::*, search::*, tasks::*, Rc};
+use crate::{client::Client, document::*, errors::Error, request::*, search::*, tasks::*};
 use serde::{de::DeserializeOwned, Deserialize, Serialize};
 use serde_json::json;
-use std::{collections::HashMap, fmt::Display, time::Duration};
+use std::{collections::HashMap, fmt::Display, sync::Arc, time::Duration};
 use time::OffsetDateTime;
 
 #[derive(Deserialize, Debug)]
@@ -18,7 +18,7 @@ pub struct JsonIndex {
 impl JsonIndex {
     pub(crate) fn into_index(self, client: &Client) -> Index {
         Index {
-            uid: Rc::new(self.uid),
+            uid: Arc::new(self.uid),
             client: client.clone(),
         }
     }
@@ -70,7 +70,7 @@ impl JsonIndex {
 /// ```
 #[derive(Debug, Clone)]
 pub struct Index {
-    pub(crate) uid: Rc<String>,
+    pub(crate) uid: Arc<String>,
     pub(crate) client: Client,
 }
 

@@ -27,9 +27,8 @@ wasm-bindgen = "0.2"
 wasm-bindgen-futures = "0.4"
 
 [features]
-default = ["isahc-static-curl", "sync"]
+default = ["isahc-static-curl"]
 isahc-static-curl = ["isahc/static-curl"]
-sync = []
 
 [dev-dependencies]
 env_logger = "0.9"
@@ -49,5 +48,5 @@ console_error_panic_hook = "0.1"
 [[example]]
 name = "web_app"
 crate-type = ["cdylib", "rlib"]
-required-features = ["sync"]
+required-features = []
 path = "examples/web_app/src/lib.rs"
